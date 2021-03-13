@@ -1,0 +1,33 @@
+{% extends 'book/Shared/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Book List</h1>
+    <table class="table table-striped ">
+        <thead>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {%for i in data%}
+                <tr>
+                    <td>{{i.name}}</td>
+                    <td>{{i.author}}</td>
+                    <td style="color:{{i.category.color}};">{{i.category}}</td>
+                    <td>{{i.price}}</td>
+                    <td><a href={% url 'update_book' id=i.id%}>Edit</a>
+                        <a href={% url 'delete_book' id=i.id%} onclick="return confirm('Are you sure?')">Delete</a></td>
+                </tr>
+            {%endfor%}
+
+        </tbody>
+    </table>
+        {% include 'book/shared/pagination.html' %} 
+</div>
+<h3 class="text-success">{{heading}}</h3>
+
+
+
+{% endblock  %}

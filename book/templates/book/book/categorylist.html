@@ -1,0 +1,33 @@
+{% extends 'book/Shared/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Category List</h1>
+    <a href={% url 'create_category'%}>+New Category</a>
+    <table class="table table-striped ">
+        <thead>
+            <th>Id</th>
+           
+            <th>Category Name</th>
+            <th>Description</th>
+            <th>Color</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {%for i in object_list%}
+                <tr>
+                    <td>{{i.id}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.description}}</td>
+                    <td style="color:{{i.color}};">{{i.color}}</td>
+                    
+                    <td><a href={% url 'update_category' id=i.id%}>Edit</a>
+                        <a href={% url 'delete_category' id=i.id%} onclick="return confirm('Are you sure?')">Delete</a></td>
+                </tr>
+            {%endfor%}
+
+        </tbody>
+    </table>
+</div>
+<h3 class="text-success">{{heading}}</h3>
+
+{% endblock  %}
